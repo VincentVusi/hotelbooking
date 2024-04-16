@@ -2,42 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="eng">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Room</title>
+    <title>Edit Hotel</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container mt-5">
     <h2>Edit Room</h2>
-    <form th:action="@{/admin/room/update/{id}(id=${room.id})}" th:object="${room}" method="post">
+    <form th:action="@{/admin/hotel/update/{id}(id=${hotel.id})}" th:object="${hotel}" method="post">
         <!-- form fields go here -->
         <div class="modal-body">
             <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter room type name" required>
+                <label for="name">Hotel name</label>
+                <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter hotel type name" required>
             </div>
             <div class="form-group">
-                <label for="description">Description</label>
-                <textarea class="form-control" id="description" th:field="*{description}" placeholder="Enter room type description" required></textarea>
+                <label for="location">Location</label>
+                <textarea class="form-control" id="location" th:field="*{location}" placeholder="Enter hotel type description" required></textarea>
             </div>
             <div class="form-group">
-                <label for="roomNumber">Number of rooms</label>
-                <input type="number" class="form-control" id="roomNumber" th:field="*{roomNumber}" placeholder="Enter available rooms number" required>
+                <label for="phoneNumber">Phone number</label>
+                <input type="number" class="form-control" id="phoneNumber" th:field="*{phoneNumber}" placeholder="Enter phone number" pattern="[0-9]{10}" required>
             </div>
             <div class="form-group">
-                <label for="price">Room price</label>
-                <input type="number" class="form-control" id="price" th:field="*{price}" placeholder="Enter price (R)" step="0.01" required>
-            </div>
-            <div class="form-group">
-                <label for="hotel">Hotel</label>
-                <select class="form-control" id="hotel" th:field="*{hotel.id}" required>
-                    <option value="">Select a Hotel</option>
-                    <!-- The hotels variable should be a list of all Hotel objects -->
-                    <option th:each="hotel : ${hotels}" th:value="${hotel.id}" th:text="${hotel.name}"></option>
-                </select>
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Enter email" required>
             </div>
         </div>
         <div class="modal-footer">
-            <a href="/admin/rooms" class="btn btn-secondary">Close</a>
+            <a href="/admin/hotels" class="btn btn-secondary">Close</a>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">Update Room</button>
         </div>
     </form>
@@ -53,7 +45,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure you want to update this room?
+                Are you sure you want to update this hotel?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

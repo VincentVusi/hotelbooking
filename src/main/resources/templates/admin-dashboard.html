@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hotel Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        .card-header {
+            color: #007bff;
+            text-align: center;
+            font-size: 0.8em;
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 123, 255, 0.2);
+            text-align: center;
+            font-size: 1.2em;
+        }
+        .link-card {
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .link-card:hover {
+            text-decoration: none;
+        }
+        body {
+            background-color: #ffffff;
+        }
+        h1 {
+            text-align: center;
+        }
+        i {
+            font-size: 2em;
+            line-height: 2em;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center my-3">Hotel Admin Dashboard</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Total Hotels</div>
+                <div class="card-body">
+                    <!-- Insert total number of hotels here -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Occupied Rooms</div>
+                <div class="card-body">
+                    <!-- Insert number of occupied rooms here -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Empty Rooms</div>
+                <div class="card-body">
+                    <!-- Insert number of empty rooms here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <a href="/admin/hotels" class="card link-card">
+                <div class="card-header">
+                    <i class="fas fa-hotel"></i><br>
+                    Manage Hotels
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="/admin/rooms" class="card link-card">
+                <div class="card-header">
+                    <i class="fas fa-bed"></i><br>
+                    Manage Rooms
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="manage_users.html" class="card link-card">
+                <div class="card-header">
+                    <i class="fas fa-users"></i><br>
+                    Manage Users
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="statistics.html" class="card link-card">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar"></i><br>
+                    Statistics
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

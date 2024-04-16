@@ -7,8 +7,7 @@
 </head>
 <body>
 <div class="container mt-5">
-    <h2>Admin Dashboard</h2>
-    <h5>Hotel Room Types & Availability & Price</h5>
+    <h3>Manage Hotel Room</h3>
 
     <!-- Room Types Table -->
     <div class="mt-4">
@@ -19,8 +18,9 @@
                 <th scope="col">#</th>
                 <th scope="col">Type</th>
                 <th scope="col">Description</th>
-                <th scope="col">Quantity</th>
+                <th scope="col">Room Number</th>
                 <th scope="col">Price</th>
+                <th scope="col">Hotel Name</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
@@ -30,8 +30,9 @@
                 <th scope="row" th:text="${room.id}">1</th>
                 <td th:text="${room.name}">Single</td>
                 <td th:text="${room.description}">One bed...</td>
-                <td th:text="${room.numberOfRooms}">5</td>
+                <td th:text="${room.roomNumber}">5</td>
                 <td th:text="${room.price}">R500.00</td>
+                <td th:text="${room.hotel.name + ' (' + room.hotel.location + ')'}">hotel1</td>
                 <td>
                     <!-- Edit button -->
                     <a th:href="@{/admin/room/edit/{id}(id=${room.id})}" class="btn btn-primary btn-sm">Edit</a>
@@ -46,6 +47,9 @@
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addRoomModal">
             Add New Room Type
         </button>
+        <div class="modal-footer">
+            <a href="/admin" class="btn btn-secondary">Close</a></div>
+        </div>
     </div>
 
     <!-- Modal for Adding New Room Type -->
@@ -58,7 +62,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form th:action="@{/admin/room}" th:object="${room}" method="post">
+                <form th:action="@{/admin/rooms}" th:object="${room}" method="post">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -69,12 +73,20 @@
                             <textarea class="form-control" id="description" th:field="*{description}" placeholder="Enter room type description" required></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="numberOfRooms">Number of rooms</label>
-                            <input type="number" class="form-control" id="numberOfRooms" th:field="*{numberOfRooms}" placeholder="Enter available rooms number" required>
+                            <label for="roomNumber">Room number </label>
+                            <input type="number" class="form-control" id="roomNumber" th:field="*{roomNumber}" placeholder="Enter available rooms number" required>
                         </div>
                         <div class="form-group">
                             <label for="price">Room price</label>
                             <input type="number" class="form-control" id="price" th:field="*{price}" placeholder="Enter price (R)" step="0.00" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hotel">Hotel</label>
+                            <select class="form-control" id="hotel" th:field="*{hotel.id}" required>
+                                <option value="">Select a Hotel</option>
+                                <!-- The hotels variable should be a list of all Hotel objects -->
+                                <option th:each="hotel : ${hotels}" th:value="${hotel.id}" th:text="${hotel.name}"></option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">

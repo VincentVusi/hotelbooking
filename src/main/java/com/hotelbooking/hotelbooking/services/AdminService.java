@@ -1,6 +1,8 @@
 package com.hotelbooking.hotelbooking.services;
 
+import com.hotelbooking.hotelbooking.model.Hotel;
 import com.hotelbooking.hotelbooking.model.Room;
+import com.hotelbooking.hotelbooking.repository.HotelRepository;
 import com.hotelbooking.hotelbooking.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,8 @@ public class AdminService {
 
     @Autowired
     private RoomRepository roomRepository;
+    @Autowired
+    private HotelRepository hotelRepository;
 
 
     public List<Room> getAllRooms() {
@@ -29,7 +33,7 @@ public class AdminService {
         Room existingRoom = findRoomById(id);
         existingRoom.setName(room.getName());
         existingRoom.setDescription(room.getDescription());
-        existingRoom.setNumberOfRooms(room.getNumberOfRooms());
+        existingRoom.setRoomNumber(room.getRoomNumber());
         existingRoom.setPrice(room.getPrice());
         roomRepository.save(existingRoom);
     }
@@ -38,4 +42,28 @@ public class AdminService {
         roomRepository.deleteById(id);
     }
 
+
+    public List<Hotel> getAllHotels() {
+        return hotelRepository.findAll();
+    }
+    public void saveHotel(Hotel hotel) {
+        hotelRepository.save(hotel);
+    }
+
+    public Hotel getHotelById(Long id) {
+        return hotelRepository.findById(id).orElse(null);
+    }
+
+    public void updateHotel(Long id,Hotel hotel) {
+        Hotel existingHotel = getHotelById(id);
+        existingHotel.setName(hotel.getName());
+        existingHotel.setLocation(hotel.getLocation());
+        existingHotel.setPhoneNumber(hotel.getPhoneNumber());
+        existingHotel.setEmail(hotel.getEmail());
+        hotelRepository.save(existingHotel);
+    }
+
+    public void deleteHotel(Long id) {
+        hotelRepository.deleteById(id);
+    }
 }

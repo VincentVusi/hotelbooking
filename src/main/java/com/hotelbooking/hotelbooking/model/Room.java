@@ -1,9 +1,6 @@
 package com.hotelbooking.hotelbooking.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Room {
@@ -12,8 +9,10 @@ public class Room {
     private Long id;
     private String name;
     private String description;
-    private Integer numberOfRooms;
+    private Integer roomNumber;
     private Double price;
+    @ManyToOne
+    private Hotel hotel;
 
     public Long getId() {
         return id;
@@ -39,12 +38,12 @@ public class Room {
         this.description = description;
     }
 
-    public Integer getNumberOfRooms() {
-        return numberOfRooms;
+    public Integer getRoomNumber() {
+        return roomNumber;
     }
 
-    public void setNumberOfRooms(Integer numberOfRooms) {
-        this.numberOfRooms = numberOfRooms;
+    public void setRoomNumber(Integer roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
     public Double getPrice() {
@@ -53,5 +52,13 @@ public class Room {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 }
