@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h3>Manage Hotel Room</h3>
+
+    <!-- Room Types Table -->
+    <div class="mt-4">
+        <h5>Room Types</h5>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Type</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Hotel Name</th>
+                <th scope="col">Select room</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Loop through room  -->
+            <tr th:each="room : ${rooms}">
+                <td th:text="${room.name}">Single</td>
+                <td th:text="${room.description}">One bed...</td>
+                <td th:text="${room.price}">R500.00</td>
+                <td th:text="${room.hotel.name + ' (' + room.hotel.location + ')'}">hotel1</td>
+                <td>
+                    <!-- Edit button -->
+                    <a th:href="@{/admin/room/edit/{id}(id=${room.id})}" class="btn btn-primary btn-sm">View</a>
+                    <!-- Delete button -->
+                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#deleteModal" th:data-room-id="${room.id}">Select</a>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- Add new room type button -->
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addRoomModal">
+            Add New Room Type
+        </button>
+        <div class="modal-footer">
+            <a href="/admin" class="btn btn-secondary">Close</a></div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
