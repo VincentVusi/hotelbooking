@@ -3,6 +3,7 @@ package com.hotelbooking.hotelbooking.controller;
 import com.hotelbooking.hotelbooking.model.AppUser;
 import com.hotelbooking.hotelbooking.model.Room;
 import com.hotelbooking.hotelbooking.services.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,14 +33,15 @@ public class UserController {
         return "login";
     }
     @PostMapping("/login")
-    public String loginUser(@ModelAttribute("user") AppUser user, Model model) {
+    public String loginUser(@ModelAttribute("user") AppUser user, Model model , HttpSession session) {
         AppUser existingUser = userService.findUserByEmail(user.getEmail());
         if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
-            model.addAttribute("user", existingUser);
+            session.setAttribute("user",existingUser.getEmail());
             switch (userService.getAllRoles().indexOf(existingUser.getRole())){
                 case 2 : return "/finance";
                 case 3 : return "/admin";
-                default: return "redirect:/booking/hotels";
+                default:
+                    return "redirect:/booking/hotels";
             }
 
         } else {

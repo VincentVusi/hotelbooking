@@ -9,7 +9,6 @@ public class Room {
     private Long id;
     private String name;
     private String description;
-    private Integer roomNumber;
     private Double price;
     @ManyToOne
     private Hotel hotel;
@@ -36,14 +35,6 @@ public class Room {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Integer getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(Integer roomNumber) {
-        this.roomNumber = roomNumber;
     }
 
     public Double getPrice() {

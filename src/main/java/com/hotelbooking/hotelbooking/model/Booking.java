@@ -1,21 +1,35 @@
 package com.hotelbooking.hotelbooking.model;
 
 import jakarta.persistence.*;
-import java.sql.Date;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne
-    private Room room;
+    @OneToMany
+    private List<AvailableRoom> availableRooms;
     private LocalDateTime checkIn;
     private LocalDateTime checkOut;
     private Double totalCost;
+    private String bookingNumber;
     @ManyToOne
     private Guest guest;
+
+    public void setAvailableRooms(List<AvailableRoom> availableRooms) {
+        this.availableRooms = availableRooms;
+    }
+
+    public Guest getGuest() {
+        return guest;
+    }
+
+    public void setGuest(Guest guest) {
+        this.guest = guest;
+    }
 
     public Long getId() {
         return id;
@@ -25,12 +39,12 @@ public class Booking {
         this.id = id;
     }
 
-    public Room getRoom() {
-        return room;
+    public List<AvailableRoom> getAvailableRooms() {
+        return availableRooms;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setRoom(List<AvailableRoom> rooms) {
+        this.availableRooms = rooms;
     }
 
     public LocalDateTime getCheckIn() {
@@ -55,13 +69,5 @@ public class Booking {
 
     public void setTotalCost(Double totalCost) {
         this.totalCost = totalCost;
-    }
-
-    public Guest getGuest() {
-        return guest;
-    }
-
-    public void setGuest(Guest guest) {
-        this.guest = guest;
     }
 }

@@ -31,7 +31,7 @@
                 <td th:text="${hotel.email}">email@email.com</td>
                 <td>
                     <!-- Edit button -->
-                    <a th:href="@{/book/room/{id}(id=${hotel.id})}" class="btn btn-success btn-sm">Select</a>
+                    <a th:href="@{/booking/hotels/addToSession/{id}(id=${hotel.id})}" class="btn btn-success btn-sm">Select</a>
                 </td>
             </tr>
             </tbody>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Hotel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Edit Room</h2>
+    <form action="#" th:object="${guest}">
+        <div class="form-group">
+            <label for="name">Guest Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter guest name" readonly>
+        </div>
+        <div class="form-group">
+            <label for="surname">Surname</label>
+            <input type="text" class="form-control" id="surname" th:field="*{surname}" placeholder="Enter guest surname" readonly>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" class="form-control" id="phone" th:field="*{phone}" placeholder="Enter phone number" pattern="[0-9]{10}" readonly>
+        </div>
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Enter email" readonly>
+        </div>
+    </form>
+    <form action="#" th:object="${booking}" method="post">
+        <div class="form-group">
+            <label for="checkIn">Check-In Date</label>
+            <input type="text" class="form-control" id="checkIn" th:field="*{checkIn}" readonly>
+        </div>
+        <div class="form-group">
+            <label for="checkOut">Check-Out Date</label>
+            <input type="text" class="form-control" id="checkOut" th:field="*{checkOut}" readonly>
+        </div>
+        <div class="form-group">
+            <label for="totalCost">Check-Out Date</label>
+            <input type="text" class="form-control" id="totalCost" th:field="*{totalCost}" readonly>
+        </div>
+    </form>
+    <a th:href="@{/submit}" type="submit" class="btn btn-primary">Submit</a>
+    <div class="modal-footer">
+        <a  th:href="@{/booking/guest}" type="button" class="btn btn-secondary">Edit</a>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

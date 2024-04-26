@@ -1,7 +1,9 @@
 package com.hotelbooking.hotelbooking.services;
 
+import com.hotelbooking.hotelbooking.model.AvailableRoom;
 import com.hotelbooking.hotelbooking.model.Hotel;
 import com.hotelbooking.hotelbooking.model.Room;
+import com.hotelbooking.hotelbooking.repository.AvailableRoomRepository;
 import com.hotelbooking.hotelbooking.repository.HotelRepository;
 import com.hotelbooking.hotelbooking.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ public class HotelService {
     private RoomRepository roomRepository;
     @Autowired
     private HotelRepository hotelRepository;
+    @Autowired
+    private AvailableRoomRepository availableRoomRepository;
 
 
     public List<Room> getAllRooms() {
@@ -25,15 +29,14 @@ public class HotelService {
         roomRepository.save(room);
     }
 
-    public Room findRoomById(Long id) {
+    public Room getRoomById(Long id) {
         return roomRepository.findById(id).orElse(null);
     }
 
     public void updateRoom(Long id,Room room) {
-        Room existingRoom = findRoomById(id);
+        Room existingRoom = getRoomById(id);
         existingRoom.setName(room.getName());
         existingRoom.setDescription(room.getDescription());
-        existingRoom.setRoomNumber(room.getRoomNumber());
         existingRoom.setPrice(room.getPrice());
         roomRepository.save(existingRoom);
     }
@@ -66,4 +69,12 @@ public class HotelService {
     public void deleteHotel(Long id) {
         hotelRepository.deleteById(id);
     }
+    public List<Room> getAllRoomsForThisHotel(Long id){
+        return roomRepository.getAllRoomsForThisHotel(id);
+    }
+
+    public AvailableRoom getAvailableRoom(Long roomId , String roomNumber){
+        return availableRoomRepository.getAvailableRoom(roomId,roomNumber);
+    }
+
 }

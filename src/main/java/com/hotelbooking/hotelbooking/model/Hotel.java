@@ -2,8 +2,6 @@ package com.hotelbooking.hotelbooking.model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 public class Hotel {
     @Id
@@ -13,9 +11,6 @@ public class Hotel {
     private String location;
     private String phoneNumber;
     private String email;
-
-    @OneToMany
-    private List<Room> rooms;
 
     public Long getId() {
         return id;

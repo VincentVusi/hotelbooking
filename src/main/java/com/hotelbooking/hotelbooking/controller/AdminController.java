@@ -49,7 +49,7 @@ public class AdminController {
     // Show form to edit an existing room
     @GetMapping("/room/edit/{id}")
     public String showEditRoomForm(@PathVariable Long id, Model model) {
-        Room room = hotelService.findRoomById(id);
+        Room room = hotelService.getRoomById(id);
         model.addAttribute("room", room);
         model.addAttribute("hotels", hotelService.getAllHotels());
         return "admin-edit-room";
