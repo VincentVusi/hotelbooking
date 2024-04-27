@@ -10,6 +10,8 @@ public class Room {
     private String name;
     private String description;
     private Double price;
+    @OneToOne
+    private Image image;
     @ManyToOne
     private Hotel hotel;
 
@@ -51,5 +53,13 @@ public class Room {
 
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 }

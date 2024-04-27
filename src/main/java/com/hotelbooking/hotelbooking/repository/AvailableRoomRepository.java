@@ -10,8 +10,9 @@ import java.util.List;
 
 @Repository
 public interface AvailableRoomRepository extends JpaRepository<AvailableRoom, Long> {
-    @Query("SELECT av FROM AvailableRoom av WHERE av.room.id = ?1 AND av.roomNumber <> ?2 AND av.occupied = true LIMIT 1")
-    AvailableRoom getAvailableRoom(Long roomId , String roomNumber);
+    @Query("SELECT av FROM AvailableRoom av WHERE av.room.id = ?1 AND av.roomNumber <> ?2 AND av.occupied = true")
+    AvailableRoom findTopByRoomIdAndRoomNumberNotAndOccupiedTrue(Long roomId, String roomNumber);
+
 
 }
 

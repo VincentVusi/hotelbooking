@@ -36,10 +36,10 @@ public class UserController {
     public String loginUser(@ModelAttribute("user") AppUser user, Model model , HttpSession session) {
         AppUser existingUser = userService.findUserByEmail(user.getEmail());
         if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
-            session.setAttribute("user",existingUser.getEmail());
-            switch (userService.getAllRoles().indexOf(existingUser.getRole())){
-                case 2 : return "/finance";
-                case 3 : return "/admin";
+            session.setAttribute("user",existingUser);
+            switch (existingUser.getRole().getName()){
+                case "FINANCE_OFFICER" : return "/finance";
+                case "ADMIN" : return "redirect:/admin";
                 default:
                     return "redirect:/booking/hotels";
             }

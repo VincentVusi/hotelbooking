@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Image Upload</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container py-5 d-flex flex-column justify-content-center align-items-center">
+    <h1>Upload Images</h1>
+    <form method="POST" action="#" th:action="@{/admin/save/images}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="header">Upload header Image:</label>
+            <input type="file" class="form-control-file" id="header" name="images" accept="image/*" required>
+        </div>
+        <div class="form-group">
+            <label for="display1">Upload display image 1:</label>
+            <input type="file" class="form-control-file" id="display1" name="images" accept="image/*" required>
+        </div>
+        <div class="form-group">
+            <label for="display2">Upload display image 2:</label>
+            <input type="file" class="form-control-file" id="display2" name="images" accept="image/*" required>
+        </div>
+        <div class="form-group">
+            <label for="display3">Upload display image 3:</label>
+            <input type="file" class="form-control-file" id="display3" name="images" accept="image/*" required>
+        </div>
+        <div class="form-group">
+            <label for="display4">Upload display image 4:</label>
+            <input type="file" class="form-control-file" id="display4" name="images" accept="image/*" required>
+        </div>
+        <div class="form-group">
+            <label for="display5">Upload display image 5:</label>
+            <input type="file" class="form-control-file" id="display5" name="images" accept="image/*" required>
+        </div>
+        <div class="form-group">
+            <label for="display6">Upload display image 6:</label>
+            <input type="file" class="form-control-file" id="display6" name="images" accept="image/*" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+</div>
+</body>
+</html>

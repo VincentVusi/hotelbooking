@@ -1,7 +1,9 @@
 package com.hotelbooking.hotelbooking;
 
 import com.hotelbooking.hotelbooking.model.AppUser;
+import com.hotelbooking.hotelbooking.model.Image;
 import com.hotelbooking.hotelbooking.model.Role;
+import com.hotelbooking.hotelbooking.repository.ImageRepository;
 import com.hotelbooking.hotelbooking.repository.RoleRepository;
 import com.hotelbooking.hotelbooking.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.domain.Sort;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -25,28 +30,25 @@ public class HotelbookingApplication {
 	}
 
 	@Autowired
+	private ImageRepository imageRepository;
+	@Autowired
 	private UserService userService;
 	@Autowired
 	private RoleRepository roleRepository;
-	@GetMapping("/index")
-	public String index() {
+	@RequestMapping("/")
+	public String index(Model model) {
+		List<Image> images = imageRepository.findAll();
+
+		System.out.println("VinceVon"+images.get(0).getImageString());
+		model.addAttribute("images", images);
 		return "index";
+
 	}
-	@GetMapping("/about")
-	public String about() {
-		return "about";
-	}
-	@GetMapping("/gallery")
-	public String gallery() {
-		return "gallery";
-	}
-	@GetMapping("/room")
-	public String room() {
-		return "room";
-	}
+
 	@Bean
 	public CommandLineRunner setupDefaultUser() {
 		return args -> {
+
 			if(roleRepository.count() <= 0){
 				List<Role> roles = new ArrayList<>();
 				Role role1 = new Role();
@@ -64,7 +66,7 @@ public class HotelbookingApplication {
 			AppUser user = new AppUser();
 			user.setEmail("admin@admin.com");
 			user.setPassword("admin");
-			if(userService.findUserByEmail("admin@admin.com").equals(user)){
+			if(userService.findUserByEmail("admin@admin.com") == null){
 			userService.saveUser(user,"ADMIN");}
 		};
 	}

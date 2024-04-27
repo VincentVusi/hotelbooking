@@ -1,6 +1,7 @@
 package com.hotelbooking.hotelbooking.controller;
 
 import com.hotelbooking.hotelbooking.model.Hotel;
+import com.hotelbooking.hotelbooking.model.Image;
 import com.hotelbooking.hotelbooking.model.Room;
 import com.hotelbooking.hotelbooking.services.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -117,5 +122,23 @@ public class AdminController {
         hotelService.deleteHotel(id);
         redirectAttributes.addFlashAttribute("message", "Hotel  deleted successfully!");
         return "redirect:/admin/hotels";
+    }
+    @GetMapping("/images")
+    public String addImagesPage(){
+        return "add-images";
+    }
+
+    @PostMapping("/save/images")
+    public String uploadImages(@RequestParam("images") MultipartFile[] images) {
+        for (MultipartFile multipartFile : images) {
+            try {
+                byte[] data = multipartFile.getBytes();
+                Image image = new Image(data);
+                hotelService.saveImage(image);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "redirect:/";
     }
 }
