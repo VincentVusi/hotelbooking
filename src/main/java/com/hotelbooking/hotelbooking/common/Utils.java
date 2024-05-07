@@ -1,4 +1,4 @@
-package com.hotelbooking.hotelbooking.model;
+package com.hotelbooking.hotelbooking.common;
 
 import java.util.Random;
 

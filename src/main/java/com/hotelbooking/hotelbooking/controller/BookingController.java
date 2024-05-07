@@ -41,26 +41,18 @@ public class BookingController {
         return "select-hotel";
     }
 
-    @GetMapping("AddRoomToSession/{id}")
-    public String storeRoomToSession(@PathVariable Long id,HttpSession session){
-        List<AvailableRoom> rooms = (List<AvailableRoom>)session.getAttribute("rooms");
-        if(rooms==null) {
-            rooms = new ArrayList<>();
-            rooms.add(hotelService.getAvailableRoom(id ," "));
-        }else{
-        }
-
-
-        session.setAttribute("rooms",rooms);
-
+    @GetMapping("storeRoomToSession/{id}")
+    public String storeRoomToSession(@PathVariable Long id , HttpSession session){
+        session.setAttribute("selectedRoom",hotelService.getRoomById(id));
         return "redirect:/booking/guest";
     }
+
     @GetMapping("/guest")
     public String enterUserGuestInfo(Model model) {
         model.addAttribute("guest",new Guest());
         return "guest-info";
     }
-    @GetMapping("/booking")
+    @PostMapping("/booking")
     public String enterBookingInfo(Model model , HttpSession session , Guest guest) {
         session.setAttribute("guest",guest);
         model.addAttribute("booking",new Booking());
@@ -69,10 +61,28 @@ public class BookingController {
 
     @PostMapping("/confirm")
     public String confirmBooking(Booking booking , HttpSession session , Model model) {
-        session.setAttribute("booking",booking);
+        List<Room> bookedRooms = new ArrayList<>();
+        bookedRooms.add((Room) session.getAttribute("selectedRoom"));
+        booking.setRooms(bookedRooms);
+        session.setAttribute("booking", booking);
         model.addAttribute("guest",session.getAttribute("guest"));
-        model.addAttribute("booking",booking);
+        model.addAttribute("booking", booking);
         return "confirm-booking";
+    }
+
+    @GetMapping("/payment")
+    public String payment(Model model) {
+        model.addAttribute("payment",new Payment());
+        return "payment";
+    }
+    @PostMapping("/save-booking")
+    public String saveBooking(@ModelAttribute("payment") Payment payment,HttpSession session) {
+        session.getAttribute("hotel");
+        session.getAttribute("selectedRoom");
+        session.getAttribute("guest");
+        session.getAttribute("booking");
+
+        return "booking-successful";
     }
 
     @GetMapping("/hotel/edit/{id}")

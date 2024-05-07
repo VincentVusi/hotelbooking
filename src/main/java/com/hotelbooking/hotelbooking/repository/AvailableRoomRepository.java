@@ -13,6 +13,8 @@ public interface AvailableRoomRepository extends JpaRepository<AvailableRoom, Lo
     @Query("SELECT av FROM AvailableRoom av WHERE av.room.id = ?1 AND av.roomNumber <> ?2 AND av.occupied = true")
     AvailableRoom findTopByRoomIdAndRoomNumberNotAndOccupiedTrue(Long roomId, String roomNumber);
 
+    @Query("SELECT av FROM AvailableRoom av WHERE av.room.id = ?1 AND av.occupied = false")
+    AvailableRoom findTopByRoomIdAndOccupiedFalse(Long roomId);
 
 }
 

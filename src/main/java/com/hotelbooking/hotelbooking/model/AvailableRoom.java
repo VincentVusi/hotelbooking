@@ -8,6 +8,7 @@ public class AvailableRoom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String roomNumber;
+
     private Boolean occupied;
     @ManyToOne
     private Room room;

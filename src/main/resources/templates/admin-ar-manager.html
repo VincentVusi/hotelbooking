@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h3>Manage Available Room</h3>
+
+    <!-- Room Types Table -->
+    <div class="mt-4">
+        <h5>Room Types</h5>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Room Number</th>
+                <th scope="col">Occupancy</th>
+                <th scope="col">Room Type</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Loop through ar  -->
+            <tr th:each="ar : ${ars}">
+                <th scope="row" th:text="${ar.id}">1</th>
+                <td th:text="${ar.roomNumber}">Single</td>
+                <td th:text="${ar.occupied}">One bed...</td>
+                <td th:text="${ar.room.name + ' (' + ar.room.description + ')'}">room1</td>
+                <td>
+                    <!-- Edit button -->
+                    <a th:href="@{/admin/ar/edit/{id}(id=${ar.id})}" class="btn btn-primary btn-sm">Edit</a>
+                    <!-- Delete button -->
+                    <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" th:data-ar-id="${ar.id}">Delete</a>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- Add new ar type button -->
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addRoomModal">
+            Add Available Room
+        </button>
+        <div class="modal-footer">
+            <a href="/admin" class="btn btn-secondary">Close</a></div>
+    </div>
+</div>
+
+<!-- Modal for Adding New Room Type -->
+<div class="modal fade" id="addRoomModal" tabindex="-1" role="dialog" aria-labelledby="addRoomModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addRoomModalLabel">New Room Type</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form th:action="@{/admin/ars}" th:object="${ar}" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="roomNumber">Name</label>
+                        <input type="text" class="form-control" id="roomNumber" th:field="*{roomNumber}" placeholder="Enter ar type name" required>
+                    </div>
+                    <div class="form-group ml-4">
+                        <input type="checkbox" class="form-check-input" id="occupied" th:field="*{occupied}">
+                        <label for="occupied" class="form-check-label">Occupied</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="room">Room Type</label>
+                        <select class="form-control" id="room" th:field="*{room.id}" required>
+                            <option value="">Select a Room Type</option>
+                            <!-- The rooms variable should be a list of all Hotel objects -->
+                            <option th:each="room : ${rooms}" th:value="${room.id}" th:text="${room.name}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this ar?<br/>(THIS ACTION CAN NOT BE REVERSED)
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a href="#" class="btn btn-danger" id="confirmDelete">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var arId;
+        $("[data-toggle='modal']").click(function() {
+            arId = $(this).data("ar-id");
+        });
+        $("#confirmDelete").click(function() {
+            window.location.href = "/admin/ar/delete/" + arId;
+        });
+    });
+</script>
+</body>
+</html>

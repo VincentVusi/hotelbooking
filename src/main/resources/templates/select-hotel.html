@@ -2,12 +2,33 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="eng">
 <head>
     <meta charset="UTF-8">
-    <title>Hotel Admin Dashboard</title>
+    <title>Select Hotel</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="pages/landing">Amazing</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/pages/landing">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pages/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pages/services">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container mt-5">
-    <h3>Hotel Manager</h3>
+    <h3>Select Hotel</h3>
 
     <!-- Room Types Table -->
     <div class="mt-4">
@@ -30,14 +51,14 @@
                 <td th:text="${hotel.phoneNumber}">08178945</td>
                 <td th:text="${hotel.email}">email@email.com</td>
                 <td>
-                    <!-- Edit button -->
+                    <!-- select button -->
                     <a th:href="@{/booking/hotels/addToSession/{id}(id=${hotel.id})}" class="btn btn-success btn-sm">Select</a>
                 </td>
             </tr>
             </tbody>
         </table>
         <div class="modal-footer">
-            <a href="/admin" class="btn btn-secondary">Close</a></div>
+            <a href="/" class="btn btn-secondary">Close</a></div>
     </div>
 
 

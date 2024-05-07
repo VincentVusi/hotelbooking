@@ -33,8 +33,8 @@ public class MenuPages {
     public String aboutPage(){
         return "about";
     }
-    @GetMapping("/service")
+    @GetMapping("/services")
     public String servicePage(){
-        return "service";
+        return "services";
     }
 }

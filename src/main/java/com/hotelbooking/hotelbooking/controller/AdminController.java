@@ -1,5 +1,6 @@
 package com.hotelbooking.hotelbooking.controller;
 
+import com.hotelbooking.hotelbooking.model.AvailableRoom;
 import com.hotelbooking.hotelbooking.model.Hotel;
 import com.hotelbooking.hotelbooking.model.Image;
 import com.hotelbooking.hotelbooking.model.Room;
@@ -78,6 +79,57 @@ public class AdminController {
         redirectAttributes.addFlashAttribute("message", "Room  deleted successfully!");
         return "redirect:/admin/rooms";
     }
+
+    @GetMapping("/ars")
+    public String listAvailableRooms(Model model) {
+        model.addAttribute("ars", hotelService.getAllAvailableRooms());
+        model.addAttribute("ar", new AvailableRoom()); // For the modal form
+        model.addAttribute("rooms", hotelService.getAllRooms());
+        return "admin-ar-manager";
+    }
+
+    // Sare a new ar
+    @PostMapping("/ars")
+    public String sareAvailableRoom(@ModelAttribute("ar") AvailableRoom ar, BindingResult result, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            return "admin-ar-manager";
+        }
+        Room room = hotelService.getRoomById(ar.getRoom().getId()); // Assuming you hare a method to get a room by ID
+        ar.setRoom(room);
+        hotelService.saveAvailableRoom(ar);
+        redirectAttributes.addFlashAttribute("message", "AvailableRoom added successfully!");
+        return "redirect:/admin/ars";
+    }
+
+
+    // Show form to edit an existing ar
+    @GetMapping("/ar/edit/{id}")
+    public String showEditAvailableRoomForm(@PathVariable Long id, Model model) {
+        AvailableRoom ar = hotelService.getAvailableRoomById(id);
+        model.addAttribute("ar", ar);
+        model.addAttribute("rooms", hotelService.getAllRooms());
+        return "admin-edit-ar";
+    }
+
+    // Update an existing ar
+    @PostMapping("/ar/update/{id}")
+    public String updateAvailableRoom(@PathVariable Long id, @ModelAttribute("ar") AvailableRoom ar, BindingResult result, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            return "admin-edit-ar";
+        }
+        hotelService.updateAvailableRoom(id, ar);
+        redirectAttributes.addFlashAttribute("message", "AvailableRoom updated successfully!");
+        return "redirect:/admin/ars";
+    }
+
+    // Delete a ar
+    @GetMapping("/ar/delete/{id}")
+    public String deleteAvailableRoom(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        hotelService.deleteAvailableRoom(id);
+        redirectAttributes.addFlashAttribute("message", "AvailableRoom  deleted successfully!");
+        return "redirect:/admin/ars";
+    }
+
 
     @GetMapping("/hotels")
     public String listHotels(Model model) {
