@@ -39,7 +39,6 @@ public class HotelbookingApplication {
 	public String index(Model model) {
 		List<Image> images = imageRepository.findAll();
 
-		System.out.println("VinceVon"+images.get(0).getImageString());
 		model.addAttribute("images", images);
 		return "index";
 

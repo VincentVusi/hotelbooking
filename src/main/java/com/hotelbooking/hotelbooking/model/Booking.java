@@ -18,6 +18,8 @@ public class Booking {
     private String bookingNumber;
     @ManyToOne
     private Guest guest;
+    @OneToOne
+    private Payment payment;
 
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
@@ -69,8 +71,23 @@ public class Booking {
         for (Room room : this.rooms) {
             totalRoomPrice += room.getPrice();
         }
-
         return totalRoomPrice;
     }
 
+
+    public String getBookingNumber() {
+        return bookingNumber;
+    }
+
+    public void setBookingNumber(String bookingNumber) {
+        this.bookingNumber = bookingNumber;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
 }

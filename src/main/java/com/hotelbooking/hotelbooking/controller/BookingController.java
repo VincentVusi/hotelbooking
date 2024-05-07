@@ -77,11 +77,17 @@ public class BookingController {
     }
     @PostMapping("/save-booking")
     public String saveBooking(@ModelAttribute("payment") Payment payment,HttpSession session) {
-        session.getAttribute("hotel");
-        session.getAttribute("selectedRoom");
-        session.getAttribute("guest");
-        session.getAttribute("booking");
+        Hotel hotel = (Hotel)session.getAttribute("hotel");
+        Room room = (Room)session.getAttribute("selectedRoom");
+        Guest guest = (Guest) session.getAttribute("guest");
+        Booking booking = (Booking)session.getAttribute("booking");
 
+        guest.setAppUser((AppUser) session.getAttribute("user"));
+        hotelService.saveGuest(guest);
+        hotelService.savePayment(payment);
+        booking.setGuest(guest);
+        booking.setPayment(payment);
+        hotelService.saveBooking(booking);
         return "booking-successful";
     }
 
