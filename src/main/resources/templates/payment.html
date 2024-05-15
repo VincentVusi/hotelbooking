@@ -37,16 +37,16 @@
         <div class="modal-body">
             <div class="form-group">
                 <label for="cardOwner">Card Holder (e.g J Doe)</label>
-                <input type="text" class="form-control" id="cardOwner" th:field="*{cardOwner}" placeholder="Card holder as seen on card" required />
+                <input type="text" class="form-control" id="cardOwner" th:field="*{cardOwner}" placeholder="Card holder as seen on card" pattern="[A-Za-z]+" title="Alphabetical characters only" required />
             </div>
             <div class="form-group">
                 <label for="creditCardNumber">Card number (16 digits)</label>
-                <input type="text" class="form-control" id="creditCardNumber" th:field="*{creditCardNumber}" placeholder="16 digit card number"  pattern="[0-9]{10}" required />
+                <input type="text" class="form-control" id="creditCardNumber" th:field="*{creditCardNumber}" placeholder="16 digit card number" pattern="\d{16}" title="Exactly 16 digits" required />
             </div>
             <div class="form-group">
                 <label for="cardType">Card Type</label>
                 <select class="form-control" id="cardType" th:field="*{cardType}" required>
-                    <option value="" >Select a Hotel</option>
+                    <option disabled selected >Select a Hotel</option>
                     <!-- The hotels variable should be a list of all Hotel objects -->
                     <option value="American Express">American Express</option>
                     <option value="VISA">VISA</option>
@@ -55,11 +55,11 @@
             </div>
             <div class="form-group">
                 <label for="expiryDate">Expiry Date ( e.g. 02/26 )</label>
-                <input type="text" class="form-control" id="expiryDate" th:field="*{expiryDate}" pattern="(0[1-9]|1[0-2])\/\d{2}" placeholder="Enter date in MM/YY format" required>
+                <input type="text" class="form-control" id="expiryDate" th:field="*{expiryDate}"  pattern="(0[1-9]|1[0-2])\/\d{2}" title="Enter date in MM/YY format" placeholder="Enter date in MM/YY format" required>
             </div>
             <div class="form-group">
                 <label for="cvv">CVV Number (3 digits)</label>
-                <input type="number" class="form-control" id="cvv" th:field="*{cvv}" placeholder="Enter phone number" pattern="[0-9]{3}" required>
+                <input type="number" class="form-control" id="cvv" th:field="*{cvv}" placeholder="Enter phone number" pattern="\d{3}" title="Exactly 3 digits" required>
             </div>
         </div>
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirmModal">Book Now</button>

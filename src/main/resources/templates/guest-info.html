@@ -35,15 +35,15 @@
     <form action="#" th:action="@{/booking/booking}" th:object="${guest}" method="post">
         <div class="form-group">
             <label for="name">Guest Name</label>
-            <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter guest name" required>
+            <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter guest name" pattern="[A-Za-z]+" title="Alphabetical characters only" required>
         </div>
         <div class="form-group">
             <label for="surname">Surname</label>
-            <input type="text" class="form-control" id="surname" th:field="*{surname}" placeholder="Enter guest surname" required>
+            <input type="text" class="form-control" id="surname" th:field="*{surname}" placeholder="Enter guest surname" pattern="[A-Za-z]+" title="Alphabetical characters only" required>
         </div>
         <div class="form-group">
             <label for="phone">Phone Number</label>
-            <input type="tel" class="form-control" id="phone" th:field="*{phone}" placeholder="Enter phone number" pattern="[0-9]{10}" required>
+            <input type="tel" class="form-control" id="phone" th:field="*{phone}" placeholder="Enter phone number" pattern=".{10,}" title="Enter 10 digits" required>
         </div>
         <div class="form-group">
             <label for="email">Email Address</label>

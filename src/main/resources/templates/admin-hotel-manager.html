@@ -95,11 +95,11 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="name">Hotel Name</label>
-                            <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter hotel type name" required>
+                            <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter hotel type name" pattern="[A-Za-z]+" title="Alphabetical characters only"required>
                         </div>
                         <div class="form-group">
                             <label for="location">Location(Keep it simple)</label>
-                            <input type="text" class="form-control" id="location" th:field="*{location}" placeholder="Enter hotel location (e.d Witbank)" required/>
+                            <input type="text" class="form-control" id="location" th:field="*{location}" placeholder="Enter hotel location (e.d Witbank)"  required/>
                         </div>
                         <div class="form-group">
                             <label for="phoneNumber">Phone</label>

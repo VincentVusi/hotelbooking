@@ -63,9 +63,9 @@ public class HotelbookingApplication {
 			}
 
 			AppUser user = new AppUser();
-			user.setEmail("admin@admin.com");
-			user.setPassword("admin");
-			if(userService.findUserByEmail("admin@admin.com") == null){
+			user.setEmail("admin@amazing.com");
+			user.setPassword("Admin@123");
+			if(userService.findUserByEmail("admin@amazing.com") == null){
 			userService.saveUser(user,"ADMIN");}
 		};
 	}
