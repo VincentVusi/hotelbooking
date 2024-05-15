@@ -11,7 +11,8 @@
 
     <!-- Room Types Table -->
     <div class="mt-4">
-        <h5>Room Types</h5>
+        <div id="printTable">
+        <h5>Our Rooms</h5>
         <table class="table">
             <thead class="thead-dark">
             <tr>
@@ -39,10 +40,12 @@
             </tr>
             </tbody>
         </table>
+        </div>
         <!-- Add new ar type button -->
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addRoomModal">
             Add Available Room
         </button>
+        <button onclick="printTable()" class="btn btn-warning">Download as PDF</button>
         <div class="modal-footer">
             <a href="/admin" class="btn btn-secondary">Close</a></div>
     </div>
@@ -121,6 +124,17 @@
             window.location.href = "/admin/ar/delete/" + arId;
         });
     });
+
+    function printTable() {
+    var printContents = document.getElementById('printTable').innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+}
 </script>
 </body>
 </html>
