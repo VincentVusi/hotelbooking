@@ -71,6 +71,20 @@ public class HotelService {
         availableRoomRepository.deleteById(id);
     }
 
+    public List<Room> findByNameContaining(String name) {
+        return roomRepository.findByNameContaining(name);
+    }
+    public List<Room> findByDescription(String description) {
+        return roomRepository.findByDescriptionContaining(description);
+    }
+
+    public List<Room> findByPrice(Double price) {
+        return roomRepository.findByPrice(price);
+    }
+
+    public List<Room> findByHotelName(String hotelName) {
+        return roomRepository.findByHotelNameContaining(hotelName);
+    }
 
     public List<Hotel> getAllHotels() {
         return hotelRepository.findAll();

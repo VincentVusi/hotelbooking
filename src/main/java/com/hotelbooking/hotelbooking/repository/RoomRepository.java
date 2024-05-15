@@ -11,6 +11,11 @@ import java.util.List;
 public interface RoomRepository extends JpaRepository<Room, Long> {
     @Query("SELECT r FROM Room r WHERE r.hotel.id = ?1")
     List<Room> getAllRoomsForThisHotel(Long id);
+    List<Room> findByNameContaining(String name);
+    List<Room> findByDescriptionContaining(String description);
+    List<Room> findByPrice(Double price);
+    // This method assumes that the Room model has a Hotel object and the Hotel model has a name field
+    List<Room> findByHotelNameContaining(String hotelName);
 
 }
 

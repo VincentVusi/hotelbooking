@@ -32,12 +32,34 @@ public class AdminController {
         return "admin-dashboard";
     }
     @GetMapping("/rooms")
-    public String listRooms(Model model) {
-        model.addAttribute("rooms", hotelService.getAllRooms());
+    public String showRooms(@RequestParam(required = false) String filter, @RequestParam(required = false) String value, Model model) {
+        List<Room> rooms;
+        if (filter != null && value != null) {
+            switch (filter) {
+                case "name":
+                    rooms = hotelService.findByNameContaining(value);
+                    break;
+                case "description":
+                    rooms = hotelService.findByDescription(value);
+                    break;
+                case "price":
+                    rooms = hotelService.findByPrice(Double.parseDouble(value));
+                    break;
+                case "hotel":
+                    rooms = hotelService.findByHotelName(value);
+                    break;
+                default:
+                    rooms = hotelService.getAllRooms();
+            }
+        } else {
+            rooms = hotelService.getAllRooms();
+        }
         model.addAttribute("room", new Room()); // For the modal form
         model.addAttribute("hotels", hotelService.getAllHotels());
+        model.addAttribute("rooms", rooms);
         return "admin-room-manager";
     }
+
 
     // Save a new room
     @PostMapping("/rooms")

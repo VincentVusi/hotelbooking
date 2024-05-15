@@ -24,6 +24,7 @@
         <div class="form-group">
             <label for="filter">Filter by:</label>
             <select id="filter" name="filter" class="form-control">
+                <option value="">All</option>
                 <option value="name">Name</option>
                 <option value="location">Location</option>
                 <option value="phoneNumber">Phone Number</option>
@@ -37,7 +38,8 @@
     </form>
 
     <!-- Room Types Table -->
-    <div class="mt-4">
+    <div class="mt-4" >
+        <div id="printTable">
         <h5>Hotes</h5>
         <table class="table">
             <thead class="thead-dark">
@@ -68,10 +70,12 @@
             </tr>
             </tbody>
         </table>
+        </div>
         <!-- Add new hotel type button -->
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addRoomModal">
             Add New Hotel
         </button>
+        <button onclick="printTable()" class="btn btn-warning">Download as PDF</button>
         <div class="modal-footer">
             <a href="/admin" class="btn btn-secondary">Close</a></div>
         </div>
@@ -139,6 +143,8 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 <script>
     $(document).ready(function() {
         var hotelId;
@@ -153,6 +159,19 @@
     $(document).ready(function() {
     $('.toast').toast('show');
     });
+
+    function printTable() {
+    var printContents = document.getElementById('printTable').innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+}
+
+
 </script>
 </body>
 </html>
