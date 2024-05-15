@@ -10,9 +10,7 @@ public class Room {
     private String name;
     private String description;
     private Double price;
-    @OneToOne
-    private Image image;
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     private Hotel hotel;
 
     public Long getId() {
@@ -55,11 +53,4 @@ public class Room {
         this.hotel = hotel;
     }
 
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
 }

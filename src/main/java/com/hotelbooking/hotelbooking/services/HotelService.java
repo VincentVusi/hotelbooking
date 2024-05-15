@@ -45,6 +45,17 @@ public class HotelService {
     }
 
     public void deleteRoom(Long id) {
+
+        List<AvailableRoom> availableRooms = availableRoomRepository.findByRoomId(id);
+        List<Booking> bookings = bookingRepository.findByRoomId(id);
+
+        // Set the hotel field of each room to null
+        for (AvailableRoom availableRoom : availableRooms) {
+            availableRoomRepository.delete(availableRoom);
+        }
+        for (Booking booking : bookings) {
+            bookingRepository.delete(booking);
+        }
         roomRepository.deleteById(id);
     }
 
@@ -112,7 +123,7 @@ public class HotelService {
 
         // Set the hotel field of each room to null
         for (Room room : rooms) {
-            roomRepository.delete(room);
+            roomRepository.deleteById(room.getId());
         }
 
         // Now it's safe to delete the hotel
