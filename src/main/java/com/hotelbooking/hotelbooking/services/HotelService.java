@@ -147,7 +147,17 @@ public class HotelService {
         Booking existingBooking = getBookingById(id);
         bookingRepository.save(existingBooking);
     }
+    public List<Hotel> findByName(String name) {
+        return hotelRepository.findByNameContaining(name);
+    }
 
+    public List<Hotel> findByLocation(String location) {
+        return hotelRepository.findByLocationContaining(location);
+    }
+
+    public List<Hotel> findByPhoneNumber(String phoneNumber) {
+        return hotelRepository.findByPhoneNumberContaining(phoneNumber);
+    }
     public void deleteBooking(Long id) {
         bookingRepository.deleteById(id);
     }
@@ -164,5 +174,6 @@ public class HotelService {
     public void deletePayment(Long id) {
         paymentRepository.deleteById(id);
     }
+
 
 }

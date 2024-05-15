@@ -21,7 +21,10 @@
                     <a class="nav-link" href="/pages/about">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/pages/services">Contact</a>
+                    <a class="nav-link" href="/pages/services">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/logout">Logout</a>
                 </li>
             </ul>
         </div>
@@ -31,6 +34,18 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <h2 class="text-center">Create account</h2>
+            <div th:if="${message}" class="toast alert-success" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000" style="position: absolute; top: 1; right: 1;">
+                <div class="toast-header">
+                    <strong class="mr-auto">Wrong Credential
+                    </strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    <p th:text="${message}"></p>
+                </div>
+            </div>
             <form th:action="@{/users/create-account}" th:object="${user}" method="post">
                 <div class="form-group">
                     <label for="email">Email</label>
@@ -50,11 +65,17 @@
         </div>
     </div>
     </div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function() {
         $("#confirmButton").click(function() {
             $("form").submit();
         });
+    });
+
+    $(document).ready(function() {
+    $('.toast').toast('show');
     });
 </script>
 </body>

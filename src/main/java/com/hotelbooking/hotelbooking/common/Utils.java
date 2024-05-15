@@ -3,8 +3,8 @@ package com.hotelbooking.hotelbooking.common;
 import java.util.Random;
 
 public class Utils {
-    public String generateBookingNumber() {
-        int length = 10;
+    public static String generateBookingNumber() {
+        int length = 5;
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         Random random = new Random();
         char[] text = new char[length];

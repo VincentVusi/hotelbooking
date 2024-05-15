@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -132,11 +133,30 @@ public class AdminController {
 
 
     @GetMapping("/hotels")
-    public String listHotels(Model model) {
-        model.addAttribute("hotels", hotelService.getAllHotels());
-        model.addAttribute("hotel", new Hotel()); // For the modal form
+    public String showHotels(@RequestParam(required = false) String filter, @RequestParam(required = false) String value, Model model) {
+        List<Hotel> hotels;
+        if (filter != null && value != null) {
+            switch (filter) {
+                case "name":
+                    hotels = hotelService.findByName(value);
+                    break;
+                case "location":
+                    hotels = hotelService.findByLocation(value);
+                    break;
+                case "phoneNumber":
+                    hotels = hotelService.findByPhoneNumber(value);
+                    break;
+                default:
+                    hotels = hotelService.getAllHotels();
+            }
+        } else {
+            hotels = hotelService.getAllHotels();
+        }
+        model.addAttribute("hotels", hotels);
+        model.addAttribute("hotel", new Hotel()); // For the modal form6
         return "admin-hotel-manager";
     }
+
 
     // Save a new hotel
     @PostMapping("/hotels")

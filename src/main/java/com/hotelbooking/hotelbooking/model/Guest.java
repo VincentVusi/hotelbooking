@@ -13,8 +13,6 @@ public class Guest{
     private String email;
     private String name;
     private String surname;
-    @ManyToOne
-    private AppUser appUser;
 
 
     public Long getId() {
@@ -55,11 +53,4 @@ public class Guest{
         this.surname = surname;
     }
 
-    public AppUser getAppUser() {
-        return appUser;
-    }
-
-    public void setAppUser(AppUser appUser) {
-        this.appUser = appUser;
-    }
 }

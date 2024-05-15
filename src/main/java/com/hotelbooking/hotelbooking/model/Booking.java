@@ -10,19 +10,21 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToMany
-    private List<Room> rooms;
     private LocalDateTime checkIn;
     private LocalDateTime checkOut;
     private Double totalCost;
     private String bookingNumber;
     @ManyToOne
+    private Room room;
+    @ManyToOne
     private Guest guest;
     @OneToOne
     private Payment payment;
+    @ManyToOne
+    private AppUser appUser;
 
-    public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public Guest getGuest() {
@@ -41,12 +43,8 @@ public class Booking {
         this.id = id;
     }
 
-    public List<Room> getRooms() {
-        return rooms;
-    }
-
-    public void setRoom(List<Room> rooms) {
-        this.rooms = rooms;
+    public Room getRoom() {
+        return room;
     }
 
     public LocalDateTime getCheckIn() {
@@ -65,15 +63,21 @@ public class Booking {
         this.checkOut = checkOut;
     }
 
-    public Double getTotalCost() {
-        double totalRoomPrice = 0.0; // Initialize the total price
-
-        for (Room room : this.rooms) {
-            totalRoomPrice += room.getPrice();
-        }
-        return totalRoomPrice;
+    public void setTotalCost(Double totalCost) {
+        this.totalCost = totalCost;
     }
 
+    public Double getTotalCost() {
+        return this.room.getPrice();
+    }
+
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
+    }
 
     public String getBookingNumber() {
         return bookingNumber;

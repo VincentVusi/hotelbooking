@@ -37,4 +37,9 @@ public class MenuPages {
     public String servicePage(){
         return "services";
     }
+
+    @GetMapping("/access-denied")
+    public String accessDenied(){
+        return "access-denied";
+    }
 }

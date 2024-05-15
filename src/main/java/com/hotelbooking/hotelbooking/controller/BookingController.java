@@ -1,5 +1,6 @@
 package com.hotelbooking.hotelbooking.controller;
 
+import com.hotelbooking.hotelbooking.common.Utils;
 import com.hotelbooking.hotelbooking.model.*;
 import com.hotelbooking.hotelbooking.services.HotelService;
 import jakarta.servlet.http.HttpSession;
@@ -61,9 +62,7 @@ public class BookingController {
 
     @PostMapping("/confirm")
     public String confirmBooking(Booking booking , HttpSession session , Model model) {
-        List<Room> bookedRooms = new ArrayList<>();
-        bookedRooms.add((Room) session.getAttribute("selectedRoom"));
-        booking.setRooms(bookedRooms);
+        booking.setRoom((Room)session.getAttribute("selectedRoom"));
         session.setAttribute("booking", booking);
         model.addAttribute("guest",session.getAttribute("guest"));
         model.addAttribute("booking", booking);
@@ -76,18 +75,21 @@ public class BookingController {
         return "payment";
     }
     @PostMapping("/save-booking")
-    public String saveBooking(@ModelAttribute("payment") Payment payment,HttpSession session) {
+    public String saveBooking(@ModelAttribute("payment") Payment payment,HttpSession session , Model model) {
         Hotel hotel = (Hotel)session.getAttribute("hotel");
         Room room = (Room)session.getAttribute("selectedRoom");
         Guest guest = (Guest) session.getAttribute("guest");
         Booking booking = (Booking)session.getAttribute("booking");
+        String bookingNumber = Utils.generateBookingNumber();
 
-        guest.setAppUser((AppUser) session.getAttribute("user"));
+        booking.setAppUser((AppUser) session.getAttribute("user"));
         hotelService.saveGuest(guest);
         hotelService.savePayment(payment);
         booking.setGuest(guest);
         booking.setPayment(payment);
+        booking.setBookingNumber(bookingNumber);
         hotelService.saveBooking(booking);
+        model.addAttribute("bookingNumber",bookingNumber);
         return "booking-successful";
     }
 

@@ -33,10 +33,7 @@
                     <a class="nav-link" href="/pages/about">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/pages/services">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/users/logout">Logout</a>
+                    <a class="nav-link" href="/pages/services">Contact</a>
                 </li>
             </ul>
         </div>
@@ -44,43 +41,11 @@
 </nav>
 
 
-<div class="full-screen-background container-fluid d-flex flex-column justify-content-center align-items-center " th:if="${!#lists.isEmpty(images)}" th:style="'background-image: url(data:image/png;base64,' + ${images[0].imageString} + ');'">
+<div class="full-screen-background container-fluid d-flex flex-column justify-content-center align-items-center ">
 
-    <h1>Welcome to Amazing Hotels</h1>
-    <p>Your comfort is our mission.</p>
-    <a type="button" class="btn btn-info align-self-center" href="/users/login">Book Hotel</a>
-
-</div>
-
-<div class="container mt-5">
-    <div class="row justify-content-around mb-3">
-        <div class="col-md-3 card p-0">
-            <img th:src="@{'data:image/png;base64,' + ${images[1].imageString}}" class="img-fluid" alt="Image 1">
-
-        </div>
-        <div class="col-md-3 card p-0" >
-        <img th:src="@{'data:image/png;base64,' + ${images[2].imageString}}" class="img-fluid" alt="Image 2">
-
-        </div>
-        <div class="col-md-3 card p-0">
-            <img th:src="@{'data:image/png;base64,' + ${images[3].imageString}}" class="img-fluid" alt="Image 3">
-
-        </div>
-    </div>
-    <div class="row justify-content-around">
-        <div class="col-md-3 card p-0">
-            <img th:src="@{'data:image/png;base64,' + ${images[4].imageString}}" class="img-fluid" alt="Image 4">
-
-        </div>
-        <div class="col-md-3 card p-0">
-            <img th:src="@{'data:image/png;base64,' + ${images[5].imageString}}" class="img-fluid" alt="Image 5">
-
-        </div>
-        <div class="col-md-3 card p-0">
-            <img th:src="@{'data:image/png;base64,' + ${images[6].imageString}}" class="img-fluid" alt="Image 6">
-
-        </div>
-    </div>
+    <h1 class="text-info">Logout</h1>
+    <h3 class="bg-dark">Click here to logout</h3>
+    <a type="button" class="btn btn-danger align-self-center" href="/users/logout-now">Home</a>
 
 </div>
 <footer class="footer mt-3 py-3 bg-light">
