@@ -1,140 +1,72 @@
 <!doctype html>
-<html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Snippet - GoSNippets</title>
-    <link href='' rel='stylesheet'>
-    <link href='' rel='stylesheet'>
-    <style></style>
-    <script type='text/javascript' src=''></script>
-    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
-    <script type='text/javascript' src=''></script>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <title>Amazing Hotel</title>
+    <style>
+        .full-screen-background {
+          background-size: cover;
+          height: 100vh;
+          color:white;
+        }
+    </style>
 </head>
-<body oncontextmenu='return false' class='snippet-body'>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<style>
-    body {
-        font-family: 'Varela Round', sans-serif;
-    }
-
-    .modal-confirm {
-        color: #636363;
-        width: 325px;
-        font-size: 14px;
-    }
-
-    .modal-confirm .modal-content {
-        padding: 20px;
-        border-radius: 5px;
-        border: none;
-    }
-
-    .modal-confirm .modal-header {
-        border-bottom: none;
-        position: relative;
-    }
-
-    .modal-confirm h4 {
-        text-align: center;
-        font-size: 26px;
-        margin: 30px 0 -15px;
-    }
-
-    .modal-confirm .form-control,
-    .modal-confirm .btn {
-        min-height: 40px;
-        border-radius: 3px;
-    }
-
-    .modal-confirm .close {
-        position: absolute;
-        top: -5px;
-        right: -5px;
-    }
-
-    .modal-confirm .modal-footer {
-        border: none;
-        text-align: center;
-        border-radius: 5px;
-        font-size: 13px;
-    }
-
-    .modal-confirm .icon-box {
-        color: #fff;
-        position: absolute;
-        margin: 0 auto;
-        left: 0;
-        right: 0;
-        top: -70px;
-        width: 95px;
-        height: 95px;
-        border-radius: 50%;
-        z-index: 9;
-        background: #2298e6;
-        padding: 15px;
-        text-align: center;
-        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
-    }
-
-    .modal-confirm .icon-box i {
-        font-size: 58px;
-        position: relative;
-        top: 3px;
-    }
-
-    .modal-confirm.modal-dialog {
-        margin-top: 80px;
-    }
-
-    .modal-confirm .btn {
-        color: #fff;
-        border-radius: 4px;
-        background: #2298e6;
-        text-decoration: none;
-        transition: all 0.4s;
-        line-height: normal;
-        border: none;
-    }
-
-    .modal-confirm .btn:hover,
-    .modal-confirm .btn:focus {
-        background: #6fb32b;
-        outline: none;
-    }
-
-    .trigger-btn {
-        display: inline-block;
-        margin: 100px auto;
-    }
-</style>
-
-
-<!-- Modal HTML -->
-<div id="myModal">
-    <div class="modal-dialog modal-confirm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="icon-box">
-                    <i class="material-icons">&#xE876;</i>
-                </div>
-                <h4 class="modal-title w-100">Awesome!</h4>
-            </div>
-            <div class="modal-body">
-                <p class="text-center">Your booking has been confirmed. Check your email for detials.</p>
-            </div>
-            <div class="modal-footer">
-                <a href="/" class="btn btn-success btn-block">OK</a>
-            </div>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/pages/landing">Amazing</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/pages/landing">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pages/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pages/services">Contact</a>
+                </li>
+            </ul>
         </div>
     </div>
+</nav>
+
+
+<div class="full-screen-background container-fluid d-flex flex-column justify-content-center align-items-center ">
+
+    <h1 class="text-success">Account created</h1>
+    <h3 class="text-light bg-dark">Click below to login</h3>
+    <a type="button" class="btn btn-danger align-self-center" href="/users/login">login</a>
+
 </div>
-<script type='text/javascript'></script>
+<footer class="footer mt-3 py-3 bg-light">
+    <div class="container text-center">
+        <a href="https://www.facebook.com/your_facebook_username" class="btn btn-social-icon btn-facebook">
+            <i class="fab fa-facebook-f" style="color: #3b5998;"></i>
+        </a>
+        <a href="https://twitter.com/your_twitter_handle" class="btn btn-social-icon btn-twitter">
+            <i class="fab fa-twitter" style="color: #00acee;"></i>
+        </a>
+        <a href="https://www.instagram.com/your_instagram_username" class="btn btn-social-icon btn-instagram">
+            <i class="fab fa-instagram" style="color: #C13584;"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/your_linkedin_username" class="btn btn-social-icon btn-linkedin">
+            <i class="fab fa-linkedin-in" style="color: #0e76a8;"></i>
+        </a>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

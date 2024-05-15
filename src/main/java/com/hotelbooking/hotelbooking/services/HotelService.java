@@ -106,8 +106,17 @@ public class HotelService {
         hotelRepository.save(existingHotel);
     }
 
-    public void deleteHotel(Long id) {
-        hotelRepository.deleteById(id);
+    public void deleteHotel(Long hotelId) {
+        // Find all rooms associated with the hotel
+        List<Room> rooms = roomRepository.findByHotelId(hotelId);
+
+        // Set the hotel field of each room to null
+        for (Room room : rooms) {
+            roomRepository.delete(room);
+        }
+
+        // Now it's safe to delete the hotel
+        hotelRepository.deleteById(hotelId);
     }
     public List<Room> getAllRoomsForThisHotel(Long id){
         return roomRepository.getAllRoomsForThisHotel(id);

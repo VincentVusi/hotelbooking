@@ -16,6 +16,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     List<Room> findByPrice(Double price);
     // This method assumes that the Room model has a Hotel object and the Hotel model has a name field
     List<Room> findByHotelNameContaining(String hotelName);
+    List<Room> findByHotelId(Long hotelId);
 
 }
 

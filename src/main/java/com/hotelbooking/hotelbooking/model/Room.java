@@ -12,7 +12,7 @@ public class Room {
     private Double price;
     @OneToOne
     private Image image;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Hotel hotel;
 
     public Long getId() {
