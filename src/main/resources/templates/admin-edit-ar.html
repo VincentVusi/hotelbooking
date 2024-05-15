@@ -9,38 +9,30 @@
 <div class="container mt-5">
     <h2>Available Rooms</h2>
     <form th:action="@{/admin/ar/update/{id}(id=${ar.id})}" th:object="${ar}" method="post">
-        <!-- form fields go here -->
         <div class="modal-body">
             <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter ar type name" required>
+                <label for="roomNumber">Name</label>
+                <input type="text" class="form-control" id="roomNumber" th:field="*{roomNumber}" placeholder="Enter room number" required>
+            </div>
+            <div class="form-group ml-4">
+                <input type="checkbox" class="form-check-input" id="occupied" th:field="*{occupied}">
+                <label for="occupied" class="form-check-label">Occupied</label>
             </div>
             <div class="form-group">
-                <label for="description">Description</label>
-                <textarea class="form-control" id="description" th:field="*{description}" placeholder="Enter ar type description" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="arNumber">Number of ars</label>
-                <input type="number" class="form-control" id="arNumber" th:field="*{arNumber}" placeholder="Enter available ars number" required>
-            </div>
-            <div class="form-group">
-                <label for="price">Room price</label>
-                <input type="number" class="form-control" id="price" th:field="*{price}" placeholder="Enter price (R)" step="0.01" required>
-            </div>
-            <div class="form-group">
-                <label for="room">Hotel</label>
+                <label for="room">Room Type</label>
                 <select class="form-control" id="room" th:field="*{room.id}" required>
-                    <option value="">Select a Hotel</option>
-                    <!-- The rooms variable should be a list of all Hotel objects -->
+                    <option value="">Select a Room Type</option>
+                    <!-- The rooms variable should be a list of all Room objects -->
                     <option th:each="room : ${rooms}" th:value="${room.id}" th:text="${room.name}"></option>
                 </select>
             </div>
         </div>
         <div class="modal-footer">
             <a href="/admin/ars" class="btn btn-secondary">Close</a>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">Update Room</button>
+            <button type="submit" class="btn btn-primary">Update Room</button>
         </div>
     </form>
+
 </div>
 <!-- Confirmation Modal -->
 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
