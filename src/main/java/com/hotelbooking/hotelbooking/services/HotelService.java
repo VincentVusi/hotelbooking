@@ -192,6 +192,10 @@ public class HotelService {
     public List<Hotel> findByPhoneNumber(String phoneNumber) {
         return hotelRepository.findByPhoneNumberContaining(phoneNumber);
     }
+    public List<Booking> getAllBookingByUserId(Long id)
+    {
+        return bookingRepository.findByAppUserId(id);
+    }
     public void deleteBooking(Long id) {
         bookingRepository.deleteById(id);
     }

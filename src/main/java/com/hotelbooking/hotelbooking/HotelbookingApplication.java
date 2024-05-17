@@ -47,21 +47,6 @@ public class HotelbookingApplication {
 	@Bean
 	public CommandLineRunner setupDefaultUser() {
 		return args -> {
-
-			if(roleRepository.count() <= 0){
-				List<Role> roles = new ArrayList<>();
-				Role role1 = new Role();
-				role1.setName("USER");
-				Role role2 = new Role();
-				role2.setName("ADMIN");
-				Role role3 = new Role();
-				role3.setName("FINANCE_OFFICER");
-				roles.add(role1);
-				roles.add(role2);
-				roles.add(role3);
-				roleRepository.saveAll(roles);
-			}
-
 			AppUser user = new AppUser();
 			user.setEmail("admin@amazing.com");
 			user.setPassword("Admin@123");

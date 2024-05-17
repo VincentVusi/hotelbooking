@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <title>Amazing Hotel</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/pages/landing">Amazing</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/pages/landing">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pages/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pages/services">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="vh-100">
+    <div class="card m-2 bg-dark text-white p-2 text-center">
+        <h5 th:text="${'Welcome '+ #session.user.email}">Welcome User</h5>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div th:if="${message}" class="toast alert-success" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000" style="position: absolute; top: 1; right: 1;">
+                <div class="toast-header">
+                    <strong class="mr-auto">Notification</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    <p th:text="${message}"></p>
+                </div>
+            </div>
+            <div class="card m-2 bg-secondary text-white text-center p-2">
+                <h5> My Booking </h5>
+            </div>
+            <div class="card p-1 m-2 bg-dark">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Room Name</th>
+                        <th scope="col">Check-In</th>
+                        <th scope="col">Check-Out</th>
+                        <th scope="col">Total Cost</th>
+                        <th scope="col">Booking Number</th>
+                        <th scope="col">Guest Name</th>
+                        <th scope="col">Paid By</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Loop through bookings  -->
+                    <tr th:each="booking : ${bookings}" class="bg-light">
+                        <th scope="row" th:text="${booking.id}">1</th>
+                        <td th:text="${booking.room.name}">Single</td>
+                        <td th:text="${booking.checkIn}">Check-in date...</td>
+                        <td th:text="${booking.checkOut}">Check-out date...</td>
+                        <td th:text="${booking.totalCost}">Total cost...</td>
+                        <td th:text="${booking.bookingNumber}">Booking number...</td>
+                        <td th:text="${booking.guest.name}">Guest name...</td>
+                        <td th:text="${booking.payment.cardOwner}">Paid by ...</td>
+                        <td>
+                            <!-- Edit button -->
+                            <a th:href="@{/admin/booking/edit/{id}(id=${booking.id})}" class="btn btn-primary btn-sm">Edit</a>
+                            <!-- Delete button -->
+                            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" th:data-booking-id="${booking.id}">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <a type="button" href="/booking/hotels" class="btn btn-outline-success" data-toggle="modal" data-target="#addRoomModal">
+                    Add New Hotel
+                </a>
+            </div>
+        <!-- Add new hotel type button -->
+
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="container-fluid d-flex round justify-content-center align-items-center ">
+            <button class="btn m-2 p-1 btn-success text-white">Update password</button>
+            <a class="btn m-2 p-1 btn-danger
+              text-white"><h6>Delete account</h6></a>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this hotel?<br/>(THIS ACTION CAN NOT BE REVERSED)
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a href="#" class="btn btn-danger" id="confirmDelete">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<footer class="footer mt-3 py-3">
+    <div class="container text-center">
+        <a href="https://www.facebook.com/your_facebook_username" class="btn btn-social-icon btn-facebook">
+            <i class="fab fa-facebook-f" style="color: #3b5998;"></i>
+        </a>
+        <a href="https://twitter.com/your_twitter_handle" class="btn btn-social-icon btn-twitter">
+            <i class="fab fa-twitter" style="color: #00acee;"></i>
+        </a>
+        <a href="https://www.instagram.com/your_instagram_username" class="btn btn-social-icon btn-instagram">
+            <i class="fab fa-instagram" style="color: #C13584;"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/your_linkedin_username" class="btn btn-social-icon btn-linkedin">
+            <i class="fab fa-linkedin-in" style="color: #0e76a8;"></i>
+        </a>
+    </div>
+</footer>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -46,7 +46,7 @@ public class RoleCheckInterceptor implements HandlerInterceptor {
                     return false;
                 }
             }
-            if(uri.contains("/user") || uri.contains("/booking")) {
+            if(uri.contains("/user") || uri.contains("/booking") || uri.contains("/profile/user")) {
                 if(userRole.equalsIgnoreCase("USER")){
                     System.err.println("user");
                     return true;

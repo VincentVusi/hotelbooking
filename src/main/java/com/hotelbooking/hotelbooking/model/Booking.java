@@ -12,7 +12,6 @@ public class Booking {
     private Long id;
     private LocalDateTime checkIn;
     private LocalDateTime checkOut;
-    private Double totalCost;
     private String bookingNumber;
     @ManyToOne
     private Room room;
@@ -61,10 +60,6 @@ public class Booking {
 
     public void setCheckOut(LocalDateTime checkOut) {
         this.checkOut = checkOut;
-    }
-
-    public void setTotalCost(Double totalCost) {
-        this.totalCost = totalCost;
     }
 
     public Double getTotalCost() {
