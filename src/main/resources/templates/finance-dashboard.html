@@ -4,7 +4,6 @@
     <title>Hotel Admin Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -26,7 +25,33 @@
     </div>
 </nav>
 <div class="container">
-    <h3 class="card bg-primary text-white text-center p-2 m-3">Hotel Admin Dashboard</h3>
+    <h1 class="text-center my-3">Hotel Admin Dashboard</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Total Hotels</div>
+                <div class="card-body">
+                    <!-- Insert total number of hotels here -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Occupied Rooms</div>
+                <div class="card-body">
+                    <!-- Insert number of occupied rooms here -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Empty Rooms</div>
+                <div class="card-body">
+                    <!-- Insert number of empty rooms here -->
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row mt-4">
         <div class="col-md-4">
             <a href="/admin/hotels" class="card link-card">
@@ -45,7 +70,7 @@
             </a>
         </div>
         <div class="col-md-4">
-            <a href="/users/users" class="card link-card">
+            <a href="manage_users.html" class="card link-card">
                 <div class="card-header">
                     <i class="fas fa-users"></i><br>
                     Manage Users
@@ -71,10 +96,10 @@
             </a>
         </div>
         <div class="col-md-4">
-            <a href="/admin/booking" class="card link-card">
+            <a href="manage_users.html" class="card link-card">
                 <div class="card-header">
                     <i class="fas fa-users"></i><br>
-                    Manage Bookings
+                    Manage Users
                 </div>
             </a>
         </div>

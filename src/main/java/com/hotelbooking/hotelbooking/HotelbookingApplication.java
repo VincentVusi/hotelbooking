@@ -38,20 +38,31 @@ public class HotelbookingApplication {
 	@RequestMapping("/")
 	public String index(Model model) {
 		List<Image> images = imageRepository.findAll();
-
 		model.addAttribute("images", images);
 		return "index";
-
 	}
 
 	@Bean
 	public CommandLineRunner setupDefaultUser() {
 		return args -> {
-			AppUser user = new AppUser();
-			user.setEmail("admin@amazing.com");
-			user.setPassword("Admin@123");
+			if(roleRepository.findAll().isEmpty()){
+				List<Role> roles = new ArrayList<>();
+				Role userRole = new Role();
+				userRole.setName("USER");
+				roles.add(userRole);
+				Role adminRole = new Role();
+				adminRole.setName("ADMIN");
+				roles.add(adminRole);
+				Role financeOfficer = new Role();
+				financeOfficer.setName("FINANCE_OFFICER");
+				roles.add(financeOfficer);
+				roleRepository.saveAll(roles);
+			}
 			if(userService.findUserByEmail("admin@amazing.com") == null){
-			userService.saveUser(user,"ADMIN");}
+				AppUser user = new AppUser();
+				user.setEmail("admin@amazing.com");
+				user.EncryptPassword("Admin@123");
+				userService.saveUser(user,"ADMIN");}
 		};
 	}
 }

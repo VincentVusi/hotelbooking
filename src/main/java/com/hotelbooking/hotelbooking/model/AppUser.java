@@ -1,5 +1,6 @@
 package com.hotelbooking.hotelbooking.model;
 import jakarta.persistence.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class AppUser {
@@ -41,5 +42,8 @@ public class AppUser {
 
     public void setPassword(String password){
         this.password = password;
+    }
+    public void EncryptPassword(String password){
+        setPassword(new BCryptPasswordEncoder().encode(password));
     }
 }

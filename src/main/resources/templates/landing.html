@@ -7,13 +7,12 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <title>Amazing Hotel</title>
     <style>
         .full-screen-background {
           background-size: cover;
           height: 100vh;
-          color:white;
         }
     </style>
 </head>
@@ -44,7 +43,7 @@
 </nav>
 
 
-<div class="full-screen-background container-fluid d-flex flex-column justify-content-center align-items-center " th:if="${!#lists.isEmpty(images)}" th:style="'background-image: url(data:image/png;base64,' + ${images[0].imageString} + ');'">
+<div class="text-white full-screen-background container-fluid d-flex flex-column justify-content-center align-items-center " th:if="${!#lists.isEmpty(images)}" th:style="'background-image: url(data:image/png;base64,' + ${images[0].imageString} + ');'">
 
     <h1>Welcome to Amazing Hotels</h1>
     <p>Your comfort is our mission.</p>
@@ -83,7 +82,7 @@
     </div>
 
 </div>
-<footer class="footer mt-3 py-3">
+<footer class="footer mt-3 py-3 bg-dark">
     <div class="container text-center">
         <a href="https://www.facebook.com/your_facebook_username" class="btn btn-social-icon btn-facebook">
             <i class="fab fa-facebook-f" style="color: #3b5998;"></i>

@@ -26,69 +26,53 @@
     </div>
 </nav>
 <div class="container mt-5">
-    <h3>Manage Available Room</h3>
-    <div class="row d-flex justify-content-around">
-    <div class="card p-4 col-5">
-        <form th:action="@{/admin/ars}" method="get">
-            <div class="form-group">
-                <label for="occupancy">Filter Occupancy</label>
-                <select id="occupancy" name="filter" class="form-control">
-                    <option value="all">Occupied & Unoccupied</option>
-                    <option value="true">Occupied</option>
-                    <option value="false">Unoccupied</option>
-                </select>
-            </div>
-            <input type="hidden" value="null" name="value" />
-            <button type="submit" class="btn btn-primary">Filter</button>
-        </form>
-    </div>
-        <div class="card p-3 boarder-2 col-5">
-            <form th:action="@{/admin/ars}" method="get">
-                <input type="hidden" value="roomNumber" name="filter" />
-                <div class="form-group">
-                    <label for="value">Room Number</label>
-                    <input type="text" id="value" name="value" class="form-control" placeholder="Enter value to filter" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Filter</button>
-            </form>
+    <h3>Manage User</h3>
+
+    <div th:if="${message}" class="toast alert-success" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000" style="position: absolute; top: 1; right: 1;">
+        <div class="toast-header">
+            <strong class="mr-auto">Notification
+            </strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            <p th:text="${message}"></p>
         </div>
     </div>
+    <!-- Filter Form -->
 
     <!-- Room Types Table -->
     <div class="mt-4">
         <div id="printTable">
-        <h5>Our Rooms</h5>
-        <table class="table">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Room Number</th>
-                <th scope="col">Occupancy</th>
-                <th scope="col">Room Type</th>
-                <th scope="col">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- Loop through ar  -->
-            <tr th:each="ar : ${ars}">
-                <th scope="row" th:text="${ar.id}">1</th>
-                <td th:text="${ar.roomNumber}">Single</td>
-                <td th:text="${ar.occupied}">One bed...</td>
-                <td th:text="${ar.room.name + ' (' + ar.room.description + ')'}">room1</td>
-                <td>
-                    <!-- Edit button -->
-                    <a th:href="@{/admin/ar/edit/{id}(id=${ar.id})}" class="btn btn-primary btn-sm">Edit</a>
-                    <!-- Delete button -->
-                    <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" th:data-ar-id="${ar.id}">Delete</a>
+            <h5>Room Types</h5>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Loop through user  -->
+                <tr th:each="user : ${users}">
+                    <th scope="row" th:text="${user.id}">1</th>
+                    <td th:text="${user.email}">Single</td>
+                    <td>
+                        <!-- Edit button -->
+                        <a th:href="@{/users/user/edit/{id}(id=${user.id})}" class="btn btn-primary btn-sm">Edit</a>
+                        <!-- Delete button -->
+                        <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" th:data-user-id="${user.id}">Delete</a>
 
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-        <!-- Add new ar type button -->
+        <!-- Add new user type button -->
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addRoomModal">
-            Add Available Room
+            Add New Room Type
         </button>
         <button onclick="printTable()" class="btn btn-warning">Download as PDF</button>
         <div class="modal-footer">
@@ -106,31 +90,22 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form th:action="@{/admin/ars}" th:object="${ar}" method="post">
+            <form th:action="@{/users/createFinance}" th:object="${user}" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="roomNumber">Name</label>
-                        <input type="text" class="form-control" id="roomNumber" th:field="*{roomNumber}" placeholder="Enter ar type name" required>
-                    </div>
-                    <div class="form-group ml-4">
-                        <input type="checkbox" class="form-check-input" id="occupied" th:field="*{occupied}">
-                        <label for="occupied" class="form-check-label">Occupied</label>
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Enter email" required>
                     </div>
                     <div class="form-group">
-                        <label for="room">Room Type</label>
-                        <select class="form-control" id="room" th:field="*{room.id}" required>
-                            <option value="">Select a Room Type</option>
-                            <!-- The rooms variable should be a list of all Hotel objects -->
-                            <option th:each="room : ${rooms}" th:value="${room.id}" th:text="${room.name}"></option>
-                        </select>
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Enter password" required>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">Save Room Type</button>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
@@ -145,7 +120,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete this ar?<br/>(THIS ACTION CAN NOT BE REVERSED)
+                Are you sure you want to delete this user?<br/>(THIS ACTION CAN NOT BE REVERSED)
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -159,18 +134,24 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 <script>
     $(document).ready(function() {
-        var arId;
+        var userId;
         $("[data-toggle='modal']").click(function() {
-            arId = $(this).data("ar-id");
+            userId = $(this).data("user-id");
         });
         $("#confirmDelete").click(function() {
-            window.location.href = "/admin/ar/delete/" + arId;
+            window.location.href = "/admin/user/delete/" + userId;
         });
     });
 
-    function printTable() {
+    $(document).ready(function() {
+    $('.toast').toast('show');
+    });
+
+  function printTable() {
     var printContents = document.getElementById('printTable').innerHTML;
     var originalContents = document.body.innerHTML;
 
@@ -180,6 +161,8 @@
 
     document.body.innerHTML = originalContents;
 }
+
+
 </script>
 </body>
 </html>

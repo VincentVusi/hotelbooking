@@ -139,6 +139,17 @@ public class HotelService {
     public AvailableRoom getEmptyRoom(Long roomType){
         return availableRoomRepository.findTopByRoomIdAndOccupiedFalse(roomType);
     }
+    public List<AvailableRoom> getAllUnoccupiedRooms(){
+        return availableRoomRepository.findAllOccupiedFalse();
+    }
+    public List<AvailableRoom> getAllOccupiedRooms(){
+        return availableRoomRepository.findAllOccupiedTrue();
+    }
+
+    public List<AvailableRoom> getByRoomNumberContaining(String roomNumber){
+        return availableRoomRepository.findByRoomNumberContaining(roomNumber);
+    }
+
     public void saveImage(Image image){
         imageRepository.save(image);
     }

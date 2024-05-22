@@ -1,10 +1,8 @@
 package com.hotelbooking.hotelbooking.controller;
 
-import com.hotelbooking.hotelbooking.model.AvailableRoom;
-import com.hotelbooking.hotelbooking.model.Hotel;
-import com.hotelbooking.hotelbooking.model.Image;
-import com.hotelbooking.hotelbooking.model.Room;
+import com.hotelbooking.hotelbooking.model.*;
 import com.hotelbooking.hotelbooking.services.HotelService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -104,10 +102,28 @@ public class AdminController {
     }
 
     @GetMapping("/ars")
-    public String listAvailableRooms(Model model) {
-        model.addAttribute("ars", hotelService.getAllAvailableRooms());
+    public String showAvailableRooms(@RequestParam(required = false) String filter, @RequestParam(required = false) String value, Model model) {
+        List<AvailableRoom> ars;
+        if (filter != null && value != null) {
+            switch (filter) {
+                case "true":
+                    ars = hotelService.getAllOccupiedRooms();
+                    break;
+                case "false":
+                    ars = hotelService.getAllUnoccupiedRooms();
+                    break;
+                case "roomNumber":
+                    ars = hotelService.getByRoomNumberContaining(value);
+                    break;
+                default:
+                    ars = hotelService.getAllAvailableRooms();
+            }
+        } else {
+            ars = hotelService.getAllAvailableRooms();
+        }
         model.addAttribute("ar", new AvailableRoom()); // For the modal form
         model.addAttribute("rooms", hotelService.getAllRooms());
+        model.addAttribute("ars", ars);
         return "admin-ar-manager";
     }
 
@@ -235,4 +251,12 @@ public class AdminController {
         }
         return "redirect:/";
     }
+
+    @GetMapping("/booking")
+    public String allBookings(Model model , HttpSession session) {
+        List<Booking> bookings = hotelService.getAllBookings();
+        model.addAttribute("bookings" , bookings);
+        return "admin-booking-manager";
+    }
+
 }

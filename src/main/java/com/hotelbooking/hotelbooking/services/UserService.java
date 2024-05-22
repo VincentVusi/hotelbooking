@@ -41,6 +41,9 @@ public class UserService {
         existingAppUser.setEmail(user.getEmail());
         userRepository.save(existingAppUser);
     }
+    public List<AppUser> getAllFinanceOfficers(){
+        return userRepository.findByRoleName("FINANCE_OFFICER");
+    }
 
     public void deleteAppUser(Long id) {
         userRepository.deleteById(id);

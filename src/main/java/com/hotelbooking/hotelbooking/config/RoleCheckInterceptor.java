@@ -37,7 +37,7 @@ public class RoleCheckInterceptor implements HandlerInterceptor {
 
             // Check user role and grant access accordingly
             String userRole = user.getRole().getName().toUpperCase();
-            if(uri.contains("/admin")) {
+            if(uri.contains("/admin") || uri.contains("/users/users") || uri.contains("/users/createFinance") || uri.contains("/user/edit")) {
                 if(userRole.equalsIgnoreCase("ADMIN")){
                     System.err.println("admin");
                     return true;
